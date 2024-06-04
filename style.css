@@ -36,7 +36,6 @@ body {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    /* background-color: rgba(0, 0, 0, 0.5); */
     border: none;
     padding: 10px;
     cursor: pointer;
@@ -66,7 +65,6 @@ body {
     width: 100%;
     text-align: center;
     color: black;
-    /* font-size: 34px; */
     padding: 20px;
     box-sizing: border-box;
     animation: slideDown 1s forwards;
@@ -287,7 +285,6 @@ header {
 
 .course-list li {
     margin-bottom: 8px;
-    /* margin-left: 70px; */
 }
 
 .course-code {

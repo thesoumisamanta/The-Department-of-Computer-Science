@@ -31,11 +31,11 @@ function showSlide(index) {
     const offset = -currentIndex * 100;
     document.querySelector('.carousel-inner').style.transform = `translateX(${offset}%)`;
 
-    // Reset animation
+
     slides.forEach(slide => {
         const text = slide.querySelector('.carousel-text');
         text.style.animation = 'none';
-        text.offsetHeight; /* trigger reflow */
+        text.offsetHeight;
         text.style.animation = '';
     });
 }
