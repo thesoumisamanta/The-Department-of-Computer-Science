@@ -1,22 +1,57 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const carouselImages = document.querySelectorAll('.carousel-image');
-    let currentIndex = 0;
+//Page jump
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
 
-    function showImage(index) {
-        // Hide all images
-        carouselImages.forEach(image => image.style.opacity = 0);
-        // Show the image at the given index
-        carouselImages[index].style.opacity = 1;
-    }
+        const targetClass = this.getAttribute('href').substring(1);
+        const targetElement = document.querySelector('.' + targetClass);
 
-    function nextImage() {
-        currentIndex = (currentIndex + 1) % carouselImages.length;
-        showImage(currentIndex);
-    }
-
-    // Show the first image initially
-    showImage(currentIndex);
-
-    // Automatically switch to the next image every 3 seconds (3000 milliseconds)
-    setInterval(nextImage, 3000);
+        if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
 });
+
+
+// carousel images
+let currentIndex = 0;
+
+function showSlide(index) {
+    const slides = document.querySelectorAll('.carousel-item');
+    const totalSlides = slides.length;
+
+    if (index >= totalSlides) {
+        currentIndex = 0;
+    } else if (index < 0) {
+        currentIndex = totalSlides - 1;
+    } else {
+        currentIndex = index;
+    }
+
+    const offset = -currentIndex * 100;
+    document.querySelector('.carousel-inner').style.transform = `translateX(${offset}%)`;
+
+    // Reset animation
+    slides.forEach(slide => {
+        const text = slide.querySelector('.carousel-text');
+        text.style.animation = 'none';
+        text.offsetHeight; /* trigger reflow */
+        text.style.animation = '';
+    });
+}
+
+function nextSlide() {
+    showSlide(currentIndex + 1);
+}
+
+function prevSlide() {
+    showSlide(currentIndex - 1);
+}
+
+setInterval(nextSlide, 4000);
+
+
+
+
+
+
